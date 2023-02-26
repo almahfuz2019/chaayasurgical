@@ -4,12 +4,12 @@ const app = express();
 const port=process.env.PORT || 5000;
 const jwt = require('jsonwebtoken');
 const cors = require("cors");
-
 app.use(cors());
 app.use(express.json({limit: '1mb'}));
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+// https://github.com/mahfuj10/Leaves_Chat
 const { response } = require("express");
-const uri = "mongodb+srv://medical:4eJirE0oqLOuc1pA@cluster0.b9w1z5u.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://chaayasurgicalbd:yXM85Qi3gWwsPVd8@surgical.ohedx5b.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 async function run() {
      try {
@@ -188,7 +188,7 @@ app.get("/worker/:email", async (req, res) => {
           }
          })
 // create order 
-      app.post("/itemorder",veryfyJWT, async (req, res) => {
+      app.post("/itemorder", async (req, res) => {
        try {
         const productorder = req.body;
         console.log("from post api", productorder);
@@ -431,7 +431,7 @@ app.post("/addtocart", async (req, res) => {
           }
           }
         );
-//get catagroy count 
+//get categroy count 
              app.get('/catagoycount',async(req,res)=>{
               try {
                 const count=await catagoryCallection.countDocuments();
