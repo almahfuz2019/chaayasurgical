@@ -518,12 +518,12 @@ app.post("/addtocart", async (req, res) => {
             }
           }
         );
-        // search product by name
+        // search product by keywords
         app.get("/productsearch",  async(req, res) => {
           try {
-            if(req.query.name!==''){
-          const name = req.query.name;
-          const query = { name: { $regex: name, $options: 'i' } };
+            if(req.query.keywords!==''){
+          const keywords = req.query.keywords;
+          const query = { keywords: { $regex: keywords, $options: 'i' } };
           const cursor = medicalItemsCollection.find(query);
           const result = await cursor.toArray();
           res.send(result);
@@ -694,6 +694,7 @@ app.post("/addtocart", async (req, res) => {
                   catagory:updateProduct.catagory,
                   details:updateProduct.details,
                   brand:updateProduct.brand,
+                  keywords:updateProduct.keywords,
                   status:updateProduct.status,
                   image1:updateProduct.image1,
                   image2:updateProduct.image2,
