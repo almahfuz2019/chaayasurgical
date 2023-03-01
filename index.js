@@ -630,13 +630,14 @@ app.post("/addtocart", async (req, res) => {
                const {search } = req.query
                const size = parseInt(req.query.size);
                 const query=  {};
+                
                const cursor = medicalItemsCollection.find(query).project({name:1,price:1,previcePrice:1,status:1,image1:1,catagory:1});
                const count =await cursor.count()
               //  don't delete 
               //  const allProducts = await medicalItemsCollection.find({}).toArray()
               let products;
           if(page || size){
-            products = await cursor.skip(page*size).limit(size).toArray();
+            products = await cursor.skip(page*size).limit(size).sort({price:-1}).toArray();
           
           }else{
           products=await cursor.toArray();
